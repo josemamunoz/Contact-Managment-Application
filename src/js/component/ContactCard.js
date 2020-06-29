@@ -27,7 +27,13 @@ export const ContactCard = props => {
 							onClick={() => actions.getContactos(store.agendas[index])}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</Link>
-						<button className="btn" onClick={() => actions.getDelete(store.agendas[index].id)}>
+						<button
+							className="btn"
+							index={index}
+							onClick={
+								() => props.onDelete(actions.getId(store.agendas[index].id))
+								/* actions.getDelete(store.agendas[index].id) */
+							}>
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>
@@ -63,7 +69,8 @@ export const ContactCard = props => {
  **/
 ContactCard.propTypes = {
 	history: PropTypes.object,
-	onDelete: PropTypes.func
+	onDelete: PropTypes.func,
+	index: PropTypes.any
 };
 
 /**
@@ -71,7 +78,8 @@ ContactCard.propTypes = {
  * your component's properties
  **/
 ContactCard.defaultProps = {
-	/* onDelete: actions.getDelete() */
+	onDelete: null
+	/* index: 1 */
 };
 
 //onClick={() => /* console.log("pencil") */ actions.getUpdate(contacto)}

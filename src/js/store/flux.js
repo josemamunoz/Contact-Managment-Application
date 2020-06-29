@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fullName: "",
 			email: "",
 			phone: "",
-			address: ""
+			address: "",
+			id: ""
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
@@ -41,10 +42,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => console.log(data))
 					.catch(error => console.log(error));
 			},
-			getDelete: contacto => {
-				const store = getStore(contacto);
-				/* console.log(contacto); */
-				const response = fetch("https://assets.breatheco.de/apis/fake/contact/" + contacto, {
+			getDelete: id => {
+				const store = getStore();
+				console.log(id);
+				const response = fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "DELETE"
 				})
 					.then(resp => resp.json())
@@ -83,6 +84,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = newdata;
 				setStore({
 					address: newdata
+				});
+			},
+			getId: newdata => {
+				const data = newdata;
+				setStore({
+					id: newdata
 				});
 			},
 			getNewContact: () => {
